@@ -17,4 +17,4 @@ SELECT * FROM weather LIMIT 10;
 
 SELECT MAX(t_daily_max), MIN(t_daily_min) FROM weather;
 
-SELECT DATE_FORMAT(lst_date, '%M'),MAX(t_daily_max), MIN(t_daily_min) FROM weather GROUP BY DATE_FORMAT(lst_date, '%M');
+SELECT DATE_FORMAT(lst_date, 'MMMMM'),MAX(t_daily_max), MIN(t_daily_min) FROM weather GROUP BY DATE_FORMAT(lst_date, 'MMMMM');

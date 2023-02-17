@@ -14,8 +14,8 @@ LOAD DATA LOCAL INPATH '/mnt/c/Users/Miles/Documents/GitHub/futurense_hadoop-pys
 
 
 
-CREATE TABLE IF NOT EXISTS transactions (trans_id int,
-trans_date date,
+CREATE EXTERNAL TABLE IF NOT EXISTS transactions (trans_id int,
+trans_date String,
 cust_id int,
 amount double,
 category String,
@@ -41,3 +41,15 @@ SELECT c.cust_id, ROUND(SUM(amount),2) trans_amount FROM customers c JOIN transa
 --3.
 SELECT c.cust_id,first_name, ROUND(SUM(amount),2) trans_amount FROM customers c JOIN transactions t ON c.cust_id = t.cust_id GROUP BY c.cust_id,first_name ORDER BY trans_amount DESC LIMIT 3;
 
+--4.
+SELECT c.cust_id,first_name,pymt_mode, COUNT(trans_id) no_of_trans FROM customers c JOIN transactions t ON c.cust_id = t.cust_id GROUP BY c.cust_id,first_name,pymt_mode;
+
+--5.
+SELECT city, COUNT(trans_id) no_of_trans FROM customers c JOIN transactions t ON c.cust_id = t.cust_id GROUP BY city ORDER BY no_of_trans DESC LIMIT 3;
+
+--6.
+SELECT DATE_FORMAT(from_unixtime(unix_timestamp(trans_date , 'MM-dd-yyyy')),'MMMMM') Month, MAX(amount) max_tran FROM transactions
+GROUP BY DATE_FORMAT(from_unixtime(unix_timestamp(trans_date , 'MM-dd-yyyy')),'MMMMM');
+
+--7.
+SELECT * FROM transactions LIMIT 5;
