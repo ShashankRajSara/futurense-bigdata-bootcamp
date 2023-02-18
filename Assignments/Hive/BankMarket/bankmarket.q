@@ -42,7 +42,10 @@ SELECT AVG(balance) avg_balance,percentile(age, 0.5) median_balance FROM bankmar
 
 
 -- 6.	Check if age matters in marketing subscription for deposit
-SELECT age, FailureRate FROM bankmarket;
+SELECT age,SUM(IF(y='yes',1,0)) NoOfDeposits FROM bankmarket GROUP BY age LIMIT 5,20;
 
 -- 7.	Check if marital status mattered for subscription to deposit.
+SELECT marital,SUM(IF(y='yes',1,0)) NoOfDeposits FROM bankmarket GROUP BY marital;
+
 -- 8.	Check if age and marital status together mattered for subscription to deposit scheme
+SELECT age,marital,SUM(IF(y='yes',1,0)) NoOfDeposits FROM bankmarket GROUP BY age,marital ORDER BY NoOfDeposits DESC LIMIT 20;
