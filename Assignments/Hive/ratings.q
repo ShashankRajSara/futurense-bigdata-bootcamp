@@ -16,3 +16,4 @@ LOAD DATA LOCAL INPATH '/mnt/c/Users/miles/Downloads/ratings.csv' OVERWRITE INTO
 SELECT rating,COUNT(movieid) AS ratings_count
 FROM ratings
 GROUP BY rating;
+ 
