@@ -52,4 +52,22 @@ SELECT DATE_FORMAT(from_unixtime(unix_timestamp(trans_date , 'MM-dd-yyyy')),'MMM
 GROUP BY DATE_FORMAT(from_unixtime(unix_timestamp(trans_date , 'MM-dd-yyyy')),'MMMMM');
 
 --7.
-SELECT * FROM transactions LIMIT 5;
+CREATE TABLE IF NOT EXISTS transactions_clus (trans_id int,
+trans_date String,
+cust_id int,
+amount double,
+category String,
+desc String,
+city String,
+state String,
+pymt_mode String)
+COMMENT 'Transaction Details'
+CLUSTERED BY (amount) INTO 5 BUCKETS
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+STORED AS TEXTFILE;
+
+INSERT INTO transactions_clus SELECT * FROM transactions;
+
+SELECT * FROM transactions_clus TABLESAMPLE(BUCKET 3 OUT OF 5);
