@@ -28,10 +28,10 @@ LOAD DATA LOCAL INPATH '/mnt/c/Users/miles/Documents/GitHub/futurense_hadoop-pys
 
 
 -- 2.	Give marketing success rate. (No. of people subscribed / total no. of entries)
-SELECT SUM(IF(y='yes',1,0))/COUNT(*) SuccessRate FROM bankmarket;
+SELECT ROUND(SUM(IF(y='yes',1,0))/COUNT(*),3)*100 SuccessRate FROM bankmarket;
 
 -- 3.	Give marketing failure rate
-SELECT 1-(SUM(IF(y='yes',1,0))/COUNT(*)) FailureRate FROM bankmarket;
+SELECT ROUND(SUM(IF(y='no',1,0))/COUNT(*),4)*100 FailureRate FROM bankmarket;
 
 
 -- 4.	Maximum, Mean, and Minimum age of the average targeted customer
