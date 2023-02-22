@@ -4,7 +4,8 @@ PARTITIONED BY (YoR int) CLUSTERED BY (movieId) INTO 3 BUCKETS
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 COLLECTION ITEMS TERMINATED BY '|'
-STORED AS TEXTFILE;
+STORED AS TEXTFILE
+TBLPROPERTIES ('skip.header.line.count' = '1');
 
 --LOAD Data 
 LOAD DATA INPATH '/user/training/movies.csv' OVERWRITE INTO TABLE movies;
@@ -15,8 +16,11 @@ LOAD DATA INPATH '/user/training/movies.csv' OVERWRITE INTO TABLE movies;
 CREATE TABLE IF NOT EXISTS ratings (userId int, movieId String, rating float,time_stamp date)
 COMMENT 'Ratings details'
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
-STORED AS TEXTFILE;
+STORED AS TEXTFILE
+TBLPROPERTIES ('skip.header.line.count' = '1');
 
+cd 
+LOAD DATA INPATH '/user/training/ratings.csv' OVERWRITE INTO TABLE ratings;
 --a
 SELECT year(time_stamp), COUNT(movieId) movieCount FROM ratings r INNER JOIN movies m ON r.movieId = m.movieId 
 GROUP BY year(time_stamp) ORDER BY movieCount DESC;
