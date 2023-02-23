@@ -8,7 +8,9 @@ STORED AS TEXTFILE
 TBLPROPERTIES ('skip.header.line.count' = '1');
 
 --LOAD Data 
-LOAD DATA INPATH '/user/training/movies.csv' OVERWRITE INTO TABLE movies;
+LOAD DATA INPATH '/user/training/movies2.csv' OVERWRITE INTO TABLE movies;
+
+LOAD DATA LOCAL INPATH 'mnt/c/Users/Miles/Documents/GitHub/futurense-dataeng-bootcamp/Labs/Test/movies2.csv' OVERWRITE INTO TABLE movies;
 
 
 --Ratings
@@ -35,3 +37,7 @@ GROUP BY year(time_stamp) ;
 
 --d
 SELECT * FROM movies TABLESAMPLE(BUCKET 2 OUT OF 3);
+
+
+
+
