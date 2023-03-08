@@ -1,0 +1,6 @@
+100,Debit,2000
+101,Credit,3000
+102,Debit,4000
+103,Credit,5000
+104,Debit,6000
+105,Credit,7000
