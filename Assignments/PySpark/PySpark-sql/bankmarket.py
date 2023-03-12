@@ -29,11 +29,11 @@ df=spark.read.format('csv')\
 
 dfAge = df.filter(col('y') == 'yes').groupBy('age').count().sort('count',ascending = False)
 
-dfAge.write.mode("overwrite").parquet('bankParquet')
+dfAge.write.mode("overwrite").parquet('/mnt/c/Users/Miles/Documents/GitHub/futurense-dataeng-bootcamp/Assignments/PySpark/PySpark-sql/bankParquet')
 print("#######  Created Parquet File  #########")
 
 
-dfParquet= spark.read.parquet('bankParquet')
+dfParquet= spark.read.parquet('/mnt/c/Users/Miles/Documents/GitHub/futurense-dataeng-bootcamp/Assignments/PySpark/PySpark-sql/bankParquet')
 
 print("##########   Parquet File Output    ########################")
 print(dfParquet.show())
@@ -48,11 +48,11 @@ df_age_cat = df.select('age','y').\
             withColumn('age_cat',age_cat_udf(ceil(df['age']/20)*20)).\
             groupBy('age_cat').count().filter(col('count') > 2000)
 
-df_age_cat.write.mode("overwrite").format('avro').save('bankAvro')
+df_age_cat.write.mode("overwrite").format('avro').save('/mnt/c/Users/Miles/Documents/GitHub/futurense-dataeng-bootcamp/Assignments/PySpark/PySpark-sql/bankAvro')
 print("#######  Created Avro File  #########")
 
 
-dfAvro= spark.read.format('avro').load('bankAvro')
+dfAvro= spark.read.format('avro').load('/mnt/c/Users/Miles/Documents/GitHub/futurense-dataeng-bootcamp/Assignments/PySpark/PySpark-sql/bankAvro')
 
 print("##########   Avro File Output    ########################")
 print(dfAvro.show())
@@ -71,6 +71,5 @@ print(dfAvro.show())
 	3] Schedule to PySparkApplication to run every N mins
 
     
-
 
 '''
