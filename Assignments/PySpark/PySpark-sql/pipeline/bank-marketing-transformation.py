@@ -7,7 +7,7 @@
 	f) Data should be moved to '/user/training/bankmarketing/validated/yyyymmdd/error' once the transformation job is failed
 '''
 
-#./bin/spark-submit --packages org.apache.spark:spark-avro_2.12:2.4.4
+#spark-submit --packages org.apache.spark:spark-avro_2.12:3.3.2
 
 
 from pyspark.sql import SparkSession
@@ -21,7 +21,7 @@ spark = SparkSession.builder.master("spark://MILES-BL-4819-LAP.:7077").appName("
 cols="age INT,job String, marital String, education String, default String, balance DOUBLE , housing String,loan String ,contact INT, day INT, month String, duration INT, campaign INT, pdays INT, previous INT, poutcome String, y String"
 
 #a
-df =  spark.read.schema(cols).parquet('hdfs://localhost:9000/user/training/bankmarketing/validated')
+df =  spark.read.schema(cols).parquet('hdfs://localhost:9000/user/training/bankmarketing/validated/*.parquet')
 
 
 

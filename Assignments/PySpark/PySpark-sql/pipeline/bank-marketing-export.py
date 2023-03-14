@@ -25,8 +25,8 @@ try:
 	    .option("url", "jdbc:mysql://localhost/bankmarketing") \
 	    .option("driver", "com.mysql.jdbc.Driver") \
 	    .option("dbtable", "subscription_count") \
-	    .option("user", "sqoop") \
-	    .option("password", "sqoop") \
+	    .option("user", "pyspark") \
+	    .option("password", "password") \
 	    .save()
  
 	avro_df.write.mode('overwrite').csv(path=f'hdfs://localhost:9000/user/training/bankmarketing/processed/{date}/success',header=True)

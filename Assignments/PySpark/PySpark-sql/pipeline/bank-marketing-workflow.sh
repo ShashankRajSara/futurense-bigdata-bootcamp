@@ -16,7 +16,7 @@ then
             if [ $? -eq 0 ]
             then
                 echo "executing Export File"
-                spark-submit --jars ~/mysql/mysql-connector-j-8.0.32.jar bank-marketing-export.py
+                spark-submit --packages org.apache.spark:spark-avro_2.12:3.3.2 --jars ~/mysql/mysql-connector-j-8.0.32.jar bank-marketing-export.py
                 if [ $? -eq 0 ]
                     then
                         echo "Executed Export File"
